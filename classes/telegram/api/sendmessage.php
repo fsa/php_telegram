@@ -39,16 +39,21 @@ class SendMessage implements actionInterface {
     }
 
     public function setText(string $text): void {
-        $this->text=str_replace(['&nbsp;', '&laquo;', '&raquo;', '&quot;', '&deg;'], [' ', '«', '»', '"', '°'], $text);
+        $this->text=$this->removeHtmlEntities($text);
     }
     
     public function appendText(string $text): void {
         if(is_null($this->text)) {
-            $this->text=$text;
+            $this->text=$this->removeHtmlEntities($text);
         } else {
-            $this->text.=$text;
+            $this->text.=$this->removeHtmlEntities($text);
         }
     }
+
+    private function removeHtmlEntities(string $text) {
+        return str_replace(['&nbsp;', '&laquo;', '&raquo;', '&quot;', '&deg;'], [' ', '«', '»', '"', '°'], $text);
+    }
+
 
     public function setParseModeMarkdown(): void {
         $this->parse_mode='Markdown';
