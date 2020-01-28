@@ -56,7 +56,7 @@ class SendMessage implements actionInterface {
 
 
     public function setParseModeMarkdown(): void {
-        $this->parse_mode='Markdown';
+        $this->parse_mode='MarkdownV2';
     }
 
     public function setParseModeHTML(): void {
