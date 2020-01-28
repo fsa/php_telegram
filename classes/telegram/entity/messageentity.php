@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram API 4.5
+ * Telegram API 4.6
  */
 
 namespace Telegram\Entity;
@@ -13,6 +13,7 @@ class MessageEntity {
     public $length;
     public $url;
     public $user;
+    public $language;
     public $unsupported=[];
 
     public function __construct(array $message_entity) {
@@ -32,6 +33,9 @@ class MessageEntity {
                     break;
                 case 'user':
                     $this->user=new User($value);
+                    break;
+                case 'language':
+                    $this->language=$value;
                     break;
                 default:
                     $this->unsupported[$key]=$value;
