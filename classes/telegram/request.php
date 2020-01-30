@@ -77,7 +77,7 @@ class Request {
 
     public static function setWebhookExceptionHandler($chat_id) {
         self::$chat_id=$chat_id;
-        set_exception_handler([__CLASS__, 'Exception']);
+        set_exception_handler([self::class, 'Exception']);
     }
 
     public static function Exception($ex) {
