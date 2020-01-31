@@ -6,20 +6,24 @@
 
 namespace Telegram\Entity;
 
-class PollOption {
+class PollAnswer {
 
-    public $text;
-    public $voter_count;
+    public $poll_id;
+    public $user;
+    public $option_ids;
     public $unsupported=[];
 
     public function __construct(array $user) {
         foreach ($user as $key=> $value) {
             switch ($key) {
-                case 'text':
-                    $this->text=$value;
+                case 'poll_id':
+                    $this->poll_id=$value;
                     break;
-                case 'voter_count':
-                    $this->voter_count=$value;
+                case 'user':
+                    $this->user=new User($value);
+                    break;
+                case 'option_ids':
+                    $this->option_ids=$value;
                     break;
                 default:
                     $this->unsupported[$key]=$value;

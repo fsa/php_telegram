@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 4.5
+ * Telegram Bot API 4.6
  */
 
 namespace Telegram\Entity;
@@ -19,6 +19,7 @@ class Update {
     public $shipping_query;
     public $pre_checkout_query;
     public $poll;
+    public $poll_answer;
     public $unsupported=[];
 
     public function __construct($json) {
@@ -57,6 +58,9 @@ class Update {
                     break;
                 case 'poll':
                     $this->poll=new Poll($value);
+                    break;
+                case 'poll_answer':
+                    $this->poll_answer=new PollAnswer($value);
                     break;
                 default:
                     $this->unsupported[$key]=$value;

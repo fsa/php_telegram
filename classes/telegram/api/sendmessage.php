@@ -24,6 +24,7 @@ class SendMessage implements actionInterface {
                 $this->setParseModeHTML();
                 break;
             case 'Markdown':
+            case 'MarkdownV2':
                 $this->setParseModeMarkdown();
                 break;
             default:
@@ -61,6 +62,10 @@ class SendMessage implements actionInterface {
 
     public function setParseModeHTML(): void {
         $this->parse_mode='HTML';
+    }
+
+    public function setParseMode(string $parse_mode): void {
+        $this->parse_mode=$parse_mode;
     }
 
     public function setDisableWebPagePreview(bool $bool=true): void {
