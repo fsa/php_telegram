@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 4.5
+ * Telegram Bot API 4.9
  */
 
 namespace Telegram\Entity;

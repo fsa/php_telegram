@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram API 4.5
+ * Telegram API 4.9
  */
 
 namespace Telegram\Entity;
@@ -19,26 +19,28 @@ class Message {
     public $forward_sender_name;
     public $forward_date;
     public $reply_to_message;
+    public $via_bot;
     public $edit_date;
     public $media_group_id;
     public $author_signature;
     public $text;
     public $entities;
-    public $caption_entities;
+    public $animation;
     public $audio;
     public $document;
-    public $animation;
-    public $game;
     public $photo=[];
     public $sticker;
     public $video;
-    public $voice;
     public $video_note;
+    public $voice;
     public $caption;
+    public $caption_entities;
     public $contact;
-    public $location;
-    public $venue;
+    public $dice;
+    public $game;
     public $poll;
+    public $venue;
+    public $location;
     public $new_chat_members;
     public $left_chat_member;
     public $new_chat_title;
@@ -93,6 +95,9 @@ class Message {
                 case 'reply_to_message':
                     $this->reply_to_message=new Message($value);
                     break;
+                case 'via_bot':
+                    $this->from=new User($value);
+                    break;
                 case 'edit_date':
                     $this->edit_date=intval($value);
                     break;
@@ -110,20 +115,14 @@ class Message {
                         $this->entities[]=new MessageEntity($entity);
                     }
                     break;
-                case 'caption_entities':
-                    $this->caption_entities=new MessageEntity($value);
+                case 'animation':
+                    $this->animation=new Animation($value);
                     break;
                 case 'audio':
                     $this->audio=new Audio($value);
                     break;
                 case 'document':
                     $this->document=new Document($value);
-                    break;
-                case 'animation':
-                    $this->animation=new Animation($value);
-                    break;
-                case 'game':
-                    $this->game=new Game($value);
                     break;
                 case 'photo':
                     foreach ($value as $photo) {
@@ -136,26 +135,35 @@ class Message {
                 case 'video':
                     $this->video=new Video($value);
                     break;
-                case 'voice':
-                    $this->voice=new Voice($value);
-                    break;
                 case 'video_note':
                     $this->video_note=new VideoNote($value);
+                    break;
+                case 'voice':
+                    $this->voice=new Voice($value);
                     break;
                 case 'caption':
                     $this->caption=$value;
                     break;
+                case 'caption_entities':
+                    $this->caption_entities=new MessageEntity($value);
+                    break;
                 case 'contact':
                     $this->contact=new Contact($value);
                     break;
-                case 'location':
-                    $this->location=new Location($value);
+                case 'dice':
+                    $this->contact=new Dice($value);
+                    break;
+                case 'game':
+                    $this->game=new Game($value);
+                    break;
+                case 'poll':
+                    $this->poll=new Poll($value);
                     break;
                 case 'venue':
                     $this->venue=new Venue($value);
                     break;
-                case 'poll':
-                    $this->poll=new Poll($value);
+                case 'location':
+                    $this->location=new Location($value);
                     break;
                 case 'new_chat_members':
                     foreach ($value as $user) {

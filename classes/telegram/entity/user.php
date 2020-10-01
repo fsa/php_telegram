@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 4.5
+ * Telegram Bot API 4.9
  */
 
 namespace Telegram\Entity;
@@ -14,6 +14,9 @@ class User {
     public $last_name;
     public $username;
     public $language_code;
+    public $can_join_groups;
+    public $can_read_all_group_messages;
+    public $supports_inline_queries;
     public $unsupported=[];
 
     public function __construct(array $user) {
@@ -36,6 +39,15 @@ class User {
                     break;
                 case 'language_code':
                     $this->language_code=$value;
+                    break;
+                case 'can_join_groups':
+                    $this->can_join_groups=$value;
+                    break;
+                case 'can_read_all_group_messages':
+                    $this->can_read_all_group_messages=$value;
+                    break;
+                case 'upports_inline_queries':
+                    $this->supports_inline_queries=$value;
                     break;
                 default:
                     $this->unsupported[$key]=$value;

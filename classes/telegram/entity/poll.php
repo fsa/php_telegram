@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 4.6
+ * Telegram Bot API 4.9
  */
 
 namespace Telegram\Entity;
@@ -17,6 +17,10 @@ class Poll {
     public $type;
     public $allows_multiple_answers;
     public $correct_option_id;
+    public $explanation;
+    public $explanation_entities;
+    public $open_period;
+    public $close_date;
     public $unsupported=[];
 
     public function __construct(array $user) {
@@ -50,6 +54,20 @@ class Poll {
                     break;
                 case 'correct_option_id':
                     $this->correct_option_id=intval($value);
+                    break;
+                case 'explanation':
+                    $this->explanation=$value;
+                    break;
+                case 'explanation_entities':
+                    foreach ($value as $entity) {
+                        $this->explanation_entities[]=new MessageEntity($entity);
+                    }
+                    break;
+                case 'open_period':
+                    $this->open_period=intval($value);
+                    break;
+                case 'close_date':
+                    $this->close_date=intval($value);
                     break;
                 default:
                     $this->unsupported[$key]=$value;

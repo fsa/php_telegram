@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram API 4.5
+ * Telegram API 4.9
  */
 
 namespace Telegram\Entity;
@@ -14,7 +14,6 @@ class Chat {
     public $username;
     public $first_name;
     public $last_name;
-    public $all_members_are_administrators;
     public $photo;
     public $description;
     public $invite_link;

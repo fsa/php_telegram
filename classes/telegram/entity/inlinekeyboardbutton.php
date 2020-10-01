@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Telegram Bot API 4.9
+ */
+
 namespace Telegram\Entity;
 
 class InlineKeyboardButton {
@@ -45,7 +49,7 @@ class InlineKeyboardButton {
         $this->callback_game=$callback_game;
     }
     
-    public function Pay(bool $pay) {
+    public function setPay(bool $pay) {
         $this->pay=$pay;
     }
     

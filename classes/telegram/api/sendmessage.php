@@ -86,7 +86,7 @@ class SendMessage implements actionInterface {
 
     public function buildQuery(): array {
         if (is_null($this->chat_id) or is_null($this->text)) {
-            throw new Exception('Required: chat_id, text');
+            throw new \Telegram\Exception('Required: chat_id, text');
         }
         $query=[];
         $query['chat_id']=$this->chat_id;

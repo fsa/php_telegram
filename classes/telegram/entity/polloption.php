@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram API 4.6
+ * Telegram API 4.9
  */
 
 namespace Telegram\Entity;
@@ -19,7 +19,7 @@ class PollOption {
                     $this->text=$value;
                     break;
                 case 'voter_count':
-                    $this->voter_count=$value;
+                    $this->voter_count=intval($value);
                     break;
                 default:
                     $this->unsupported[$key]=$value;
