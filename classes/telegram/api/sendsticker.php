@@ -1,14 +1,18 @@
 <?php
 
+/**
+ * Telegram Bot API 5.0
+ */
+
 namespace Telegram\Api;
 
-class SendSticker implements actionInterface {
+class SendSticker extends AbstractQuery {
 
-    private $chat_id;
-    private $sticker;
-    private $disable_notification;
-    private $reply_to_message_id;
-    private $reply_markup;
+    public $chat_id;
+    public $sticker;
+    public $disable_notification;
+    public $reply_to_message_id;
+    public $reply_markup;
 
     public function __construct(string $chat_id=null, string $sticker=null) {
         if (!is_null($chat_id)) {
@@ -39,7 +43,7 @@ class SendSticker implements actionInterface {
         $this->reply_to_message_id=$id;
     }
 
-    public function setReplyMarkup(\Telegram\Entity\KeyboardInterface $keyboard): void {
+    public function setReplyMarkup(\Telegram\Entity\ReplyMarkupInterface $keyboard): void {
         $this->reply_markup=$keyboard;
     }
 
@@ -47,19 +51,7 @@ class SendSticker implements actionInterface {
         if (is_null($this->chat_id) or is_null($this->sticker)) {
             throw new Exception('Required: chat_id, sticker');
         }
-        $query=[];
-        $query['chat_id']=$this->chat_id;
-        $query['sticker']=$this->sticker;
-        if (!is_null($this->disable_notification)) {
-            $query['disable_notification']=$this->disable_notification;
-        }
-        if (!is_null($this->reply_to_message_id)) {
-            $query['reply_to_message_id']=$this->reply_to_message_id;
-        }
-        if (!is_null($this->reply_markup)) {
-            $query['reply_markup']=$this->reply_markup->get();
-        }
-        return $query;
+        return parent::buildQuery();
     }
 
 }

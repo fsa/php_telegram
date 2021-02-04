@@ -1,33 +1,14 @@
 <?php
 
 /**
- * Telegram Bot API 4.9
+ * Telegram Bot API 5.0
  */
 
 namespace Telegram\Entity;
 
-class Dice {
+class Dice extends AbstractEntity {
 
-    public $emoji;
-    public $value;
-    public $unsupported=[];
-
-    public function __construct(array $document=null) {
-        if (is_null($document)) {
-            return;
-        }
-        foreach ($document as $key=> $value) {
-            switch ($key) {
-                case 'emoji':
-                    $this->emoji=$value;
-                    break;
-                case 'value':
-                    $this->value=intval($value);
-                    break;
-                default:
-                    $this->unsupported[$key]=$value;
-            }
-        }
-    }
+    public string $emoji;
+    public int $value;
 
 }

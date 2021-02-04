@@ -1,42 +1,19 @@
 <?php
 
 /**
- * Telegram Bot API 4.9
+ * Telegram Bot API 5.0
  */
 
 namespace Telegram\Entity;
 
-class Venue {
+class Venue extends AbstractEntity {
 
-    public $location;
-    public $title;
-    public $address;
-    public $forsquare_id;
-    public $forsquare_type;
-    public $unsupported=[];
-
-    public function __construct(array $user) {
-        foreach ($user as $key=> $value) {
-            switch ($key) {
-                case 'location':
-                    $this->location=new Location($value);
-                    break;
-                case 'title':
-                    $this->title=$value;
-                    break;
-                case 'address':
-                    $this->address=$value;
-                    break;
-                case 'forsquare_id':
-                    $this->forsquare_id=$value;
-                    break;
-                case 'forsquare_type':
-                    $this->forsquare_type=$value;
-                    break;
-                default:
-                    $this->unsupported[$key]=$value;
-            }
-        }
-    }
+    public Location $location;
+    public string $title;
+    public string $address;
+    public ?string $forsquare_id=null;
+    public ?string $forsquare_type=null;
+    public ?string $google_place_id=null;
+    public ?string $google_place_type=null;
 
 }

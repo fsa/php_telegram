@@ -6,6 +6,6 @@
 
 namespace Telegram\Api;
 
-class GetMe extends AbstractQuery {
-
+class Exception extends \Exception {
+    
 }

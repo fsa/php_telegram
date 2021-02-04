@@ -1,34 +1,15 @@
 <?php
 
 /**
- * Telegram API 4.9
+ * Telegram Bot API 5.0
  */
 
 namespace Telegram\Entity;
 
-class PollAnswer {
+class PollAnswer extends AbstractEntity {
 
-    public $poll_id;
-    public $user;
-    public $option_ids;
-    public $unsupported=[];
-
-    public function __construct(array $user) {
-        foreach ($user as $key=> $value) {
-            switch ($key) {
-                case 'poll_id':
-                    $this->poll_id=$value;
-                    break;
-                case 'user':
-                    $this->user=new User($value);
-                    break;
-                case 'option_ids':
-                    $this->option_ids=$value;
-                    break;
-                default:
-                    $this->unsupported[$key]=$value;
-            }
-        }
-    }
+    public string $poll_id;
+    public User $user;
+    public array $option_ids;
 
 }

@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Telegram Bot API 4.6
+ * Telegram Bot API 5.0
  */
 
 namespace Telegram\Api;
 
-class DeleteWebhook implements actionInterface {
+class DeleteWebhook extends AbstractQuery {
 
-    public function buildQuery(): array {
-        return [];
-    }
-
-    public function getActionName(): string {
-        return 'deleteWebhook';
+    private bool $drop_pending_updates;
+    
+    public function setDropPendingUpdates(bool $drop_pending_updates) {
+        $this->drop_pending_updates=$drop_pending_updates;
     }
 
 }

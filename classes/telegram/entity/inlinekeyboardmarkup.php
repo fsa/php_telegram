@@ -1,33 +1,36 @@
 <?php
 
 /**
- * Telegram Bot API 4.9
+ * Telegram Bot API 5.0
  */
 
 namespace Telegram\Entity;
 
-class InlineKeyboardMarkup implements KeyboardInterface {
+class InlineKeyboardMarkup extends AbstractEntity implements ReplyMarkupInterface {
 
-    private $buttons=[];
+    public array $inline_keyboard=[];
     private $row;
 
     public function __construct(array $buttons=null) {
         if (!is_null($buttons)) {
-            $this->buttons=$buttons;
+            $this->inline_keyboard=$buttons;
         }
         $this->row=0;
     }
 
     public function addButton(InlineKeyboardButton $button) {
-        $this->buttons[$this->row][]=$button->get();
+        $this->inline_keyboard[$this->row][]=clone $button;
     }
 
     public function nextRow() {
         $this->row++;
     }
 
-    public function get() {
-        return json_encode(['inline_keyboard'=>$this->buttons], JSON_UNESCAPED_UNICODE);
+    public function jsonSerialize() {
+        $props=get_object_vars($this);
+        unset($props['unsupported']);
+        unset($props['row']);
+        return array_filter($props, fn($element)=>!is_null($element));
     }
 
 }

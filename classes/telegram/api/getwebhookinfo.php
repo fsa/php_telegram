@@ -1,19 +1,20 @@
 <?php
 
 /**
- * Telegram Bot API 4.6
+ * Telegram Bot API 5.0
  */
 
 namespace Telegram\Api;
 
-class GetWebhookInfo implements actionInterface {
+class GetWebhookInfo extends AbstractQuery {
 
-    public function buildQuery(): array {
-        return [];
-    }
-
-    public function getActionName(): string {
-        return 'getWebhookInfo';
+    public function httpGet(): \Telegram\Entity\WebhookInfo {
+        $result=parent::httpGet();
+        if(isset($result->ok) and $result->ok===true) {
+            return new \Telegram\Entity\WebhookInfo(get_object_vars($result->result));
+        } else {
+            return null;
+        }
     }
 
 }

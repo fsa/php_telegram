@@ -6,7 +6,7 @@
 
 namespace Telegram\Entity;
 
-class InlineKeyboardButton {
+class InlineKeyboardButton extends AbstractEntity {
 
     public $text;
     public $url;
@@ -52,31 +52,5 @@ class InlineKeyboardButton {
     public function setPay(bool $pay) {
         $this->pay=$pay;
     }
-    
-    public function get() {
-        $result['text']=$this->text;
-        if(!is_null($this->url)) {
-            $result['url']=$this->url;
-        }
-        if(!is_null($this->login_url)) {
-            $result['login_url']=$this->login_url->get();
-        }
-        if(!is_null($this->callback_data)) {
-            $result['callback_data']=$this->callback_data;
-        }
-        if(!is_null($this->switch_inline_query)) {
-            $result['switch_inline_query']=$this->switch_inline_query;
-        }
-        if(!is_null($this->switch_inline_query_current_chat)) {
-            $result['switch_inline_query_current_chat']=$this->switch_inline_query_current_chat;
-        }
-        if(!is_null($this->callback_game)) {
-            $result['callback_game']=$this->callback_game->get();
-        }
-        if(!is_null($this->pay)) {
-            $result['pay']=$this->pay;
-        }
-        return $result;
-    }
-            
+
 }

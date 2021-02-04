@@ -1,38 +1,22 @@
 <?php
 
+/**
+ * Telegram Bot API 5.0
+ */
+
 namespace Telegram\Api;
 
-class SetWebhook implements actionInterface {
+class SetWebhook extends AbstractQuery {
 
-    private $url;
-    private $certificate;
-    private $max_connections;
-    private $allowed_updates=[];
+    public string $url;
+    public $certificate;
+    public string $ip_address;
+    public int $max_connections;
+    public array $allowed_updates;
+    public bool $drop_pending_updates;
 
-    public function __construct(string $url, int $max_connections=null, array $allowed_updates=null, $certificate=null) {
+    public function __construct(string $url) {
         $this->setUrl($url);
-        $this->setCertificate($certificate);
-        $this->setMaxConnections($max_connections);
-        $this->allowed_updates=$allowed_updates;
-    }
-
-    public function getActionName(): string {
-        return 'setWebhook';
-    }
-
-    public function buildQuery(): array {
-        $query=[];
-        $query['url']=$this->url;
-        if (!is_null($this->certificate)) {
-            $query['certificate']=$this->certificate;
-        }
-        if (!is_null($this->max_connections)) {
-            $query['max_connections']=$this->max_connections;
-        }
-        if (sizeof($this->allowed_updates)>0) {
-            $query['allowed_updates']=$this->allowed_updates;
-        }
-        return $query;
     }
 
     public function setUrl(string $url) {
@@ -41,6 +25,10 @@ class SetWebhook implements actionInterface {
 
     public function setCertificate($certificate) {
         $this->certificate=$certificate;
+    }
+
+    public function setIpAddress(string $ip_address) {
+        $this->ip_address=$ip_address;
     }
 
     public function setMaxConnections(int $max_connections) {
@@ -55,7 +43,14 @@ class SetWebhook implements actionInterface {
     }
 
     public function addAllowedUpdates(string $allowed_update) {
+        if(!isset($this->allowed_updates)) {
+            $this->allowed_updates=[];
+        }
         $this->allowed_updates[]=$allowed_update;
+    }
+
+    public function setDropPendingUpdates(bool $drop_pending_updates) {
+        $this->drop_pending_updates=$drop_pending_updates;
     }
 
 }

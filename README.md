@@ -2,7 +2,7 @@
 Данные классы могут использоваться для упрощения взаимодействия с Telegram Bot API - [https://core.telegram.org/bots/api](https://core.telegram.org/bots/api). С их помощью можно произвести декодирование сообщений и преобразовать их в объекты PHP, а также осуществить подготовку сообщений для отправки. API описано не полностью, но позволяет обеспечить обработку большей части запросов и сформировать некоторые типы сообщений.
 
 # Минимальные требования
-- php 7.2.
+- php 7.4
 
 # Использование классов
 Данный проект не поддерживает composer!!!
@@ -16,17 +16,6 @@ spl_autoload_register();
 # Что ещё не реализовано
 Следующие сущности и методы в настоящее время не реализованы в коде.
 ```
-UserProfilePhotos
-ReplyKeyboardMarkup
-KeyboardButton
-KeyboardButtonPollType
-ReplyKeyboardRemove
-LoginUrl
-ForceReply
-ChatPhoto
-ChatMember
-ChatPermissions
-ResponseParameters
 InputMedia*
 sendPhoto
 sendAudio

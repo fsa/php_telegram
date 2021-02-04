@@ -1,30 +1,18 @@
 <?php
 
 /**
- * Telegram API 4.9
+ * Telegram Bot API 5.0
  */
 
 namespace Telegram\Entity;
 
-class Location {
+class Location extends AbstractEntity {
 
-    public $longitude;
-    public $latitude;
-    public $unsupported=[];
-
-    public function __construct(array $user) {
-        foreach ($user as $key=> $value) {
-            switch ($key) {
-                case 'longitude':
-                    $this->longitude=$value;
-                    break;
-                case 'latitude':
-                    $this->latitude=$value;
-                    break;
-                default:
-                    $this->unsupported[$key]=$value;
-            }
-        }
-    }
+    public float $longitude;
+    public float $latitude;
+    public ?float $horizontal_accuracy=null;
+    public ?int $live_period=null;
+    public ?int $heading=null;
+    public ?int $proximity_alert_radius=null;
 
 }

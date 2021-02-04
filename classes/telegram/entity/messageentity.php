@@ -1,46 +1,18 @@
 <?php
 
 /**
- * Telegram API 4.9
+ * Telegram Bot API 5.0
  */
 
 namespace Telegram\Entity;
 
-class MessageEntity {
+class MessageEntity extends AbstractEntity {
 
-    public $type;
-    public $offset;
-    public $length;
-    public $url;
-    public $user;
-    public $language;
-    public $unsupported=[];
-
-    public function __construct(array $message_entity) {
-        foreach ($message_entity as $key=> $value) {
-            switch ($key) {
-                case 'type':
-                    $this->type=$value;
-                    break;
-                case 'offset':
-                    $this->offset=intval($value);
-                    break;
-                case 'length':
-                    $this->length=intval($value);
-                    break;
-                case 'url':
-                    $this->url=$value;
-                    break;
-                case 'user':
-                    $this->user=new User($value);
-                    break;
-                case 'language':
-                    $this->language=$value;
-                    break;
-                default:
-                    $this->unsupported[$key]=$value;
-            }
-        }
-    }
+    public string $type;
+    public int $offset;
+    public int $length;
+    public ?string $url=null;
+    public ?User $user=null;
+    public ?string $language=null;
 
 }
