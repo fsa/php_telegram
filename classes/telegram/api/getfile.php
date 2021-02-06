@@ -6,8 +6,6 @@
 
 namespace Telegram\Api;
 
-use Settings;
-
 class GetFile extends Query {
 
     public $file_id;
@@ -31,8 +29,7 @@ class GetFile extends Query {
         if (is_null($this->file_id)) {
             throw new Exception('Required: file_id');
         }
-        $settings=Settings::get('telegram');
-        $api_url='https://api.telegram.org/file/bot'.$settings['token'];
+        $api_url='https://api.telegram.org/file/bot'.self::$token;
         $file=$this->httpPost();
         if(!$file->ok) {
             return null;
@@ -43,8 +40,8 @@ class GetFile extends Query {
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if(isset($settings['proxy'])) {
-            curl_setopt($ch, CURLOPT_PROXY, $settings['proxy']);
+        if(isset(self::$proxy)) {
+            curl_setopt($ch, CURLOPT_PROXY, self::$proxy);
         }
         $result = curl_exec($ch);
         curl_close($ch);
