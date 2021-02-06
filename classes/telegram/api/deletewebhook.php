@@ -6,7 +6,7 @@
 
 namespace Telegram\Api;
 
-class DeleteWebhook extends AbstractQuery {
+class DeleteWebhook extends Query {
 
     private bool $drop_pending_updates;
     

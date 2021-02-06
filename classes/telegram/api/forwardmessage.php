@@ -6,7 +6,7 @@
 
 namespace Telegram\Api;
 
-class ForwardMessage extends AbstractQuery {
+class ForwardMessage extends Query {
 
     public $chat_id;
     public $from_chat_id;

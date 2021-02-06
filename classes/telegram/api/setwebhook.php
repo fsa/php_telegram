@@ -6,7 +6,7 @@
 
 namespace Telegram\Api;
 
-class SetWebhook extends AbstractQuery {
+class SetWebhook extends Query {
 
     public string $url;
     public $certificate;

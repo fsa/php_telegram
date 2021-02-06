@@ -6,7 +6,7 @@
 
 namespace Telegram\Api;
 
-class SendSticker extends AbstractQuery {
+class SendSticker extends Query {
 
     public $chat_id;
     public $sticker;

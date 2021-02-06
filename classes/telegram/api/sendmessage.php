@@ -6,7 +6,7 @@
 
 namespace Telegram\Api;
 
-class SendMessage extends AbstractQuery {
+class SendMessage extends Query {
 
     public $chat_id;
     public $text;

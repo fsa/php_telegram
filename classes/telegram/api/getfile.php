@@ -8,7 +8,7 @@ namespace Telegram\Api;
 
 use Settings;
 
-class GetFile extends AbstractQuery {
+class GetFile extends Query {
 
     public $file_id;
 

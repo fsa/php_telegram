@@ -6,7 +6,7 @@
 
 namespace Telegram\Api;
 
-class GetUpdates extends AbstractQuery {
+class GetUpdates extends Query {
 
     private int $offset;
     private int $limit;

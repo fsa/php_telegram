@@ -6,7 +6,7 @@
 
 namespace Telegram\Api;
 
-class GetWebhookInfo extends AbstractQuery {
+class GetWebhookInfo extends Query {
 
     public function httpGet(): \Telegram\Entity\WebhookInfo {
         $result=parent::httpGet();

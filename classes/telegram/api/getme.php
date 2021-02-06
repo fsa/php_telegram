@@ -6,6 +6,6 @@
 
 namespace Telegram\Api;
 
-class GetMe extends AbstractQuery {
+class GetMe extends Query {
 
 }
