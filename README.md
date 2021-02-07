@@ -19,7 +19,8 @@ spl_autoload_register();
 ```php
 Telegram\Query::init($token, $proxy);
 ```
-где $token - ваш ключ Telegram Bot API;
+где
+    $token - ваш ключ Telegram Bot API;
 
     $proxy - адрес прокси, если необходимо.
 
