@@ -79,7 +79,7 @@ class Message extends AbstractEntity {
                 break;
             case 'new_chat_members':
                 foreach ($value as $entity) {
-                    $result[]=new Users($entity);
+                    $result[]=new User($entity);
                 }
                 break;
             case 'new_chat_photo':

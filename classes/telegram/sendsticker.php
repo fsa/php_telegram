@@ -4,7 +4,7 @@
  * Telegram Bot API 5.0
  */
 
-namespace Telegram\Api;
+namespace Telegram;
 
 class SendSticker extends Query {
 
@@ -43,7 +43,7 @@ class SendSticker extends Query {
         $this->reply_to_message_id=$id;
     }
 
-    public function setReplyMarkup(\Telegram\Entity\ReplyMarkupInterface $keyboard): void {
+    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): void {
         $this->reply_markup=$keyboard;
     }
 

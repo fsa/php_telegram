@@ -4,12 +4,12 @@
  * Telegram Bot API 5.0
  */
 
-namespace Telegram\Api;
+namespace Telegram;
 
-class Query {
+abstract class Query {
 
-    private static $token;
-    private static $proxy;
+    protected static $token;
+    protected static $proxy;
 
     public static function init(string $token, string $proxy=null) {
         self::$token=$token;

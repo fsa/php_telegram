@@ -4,7 +4,7 @@
  * Telegram Bot API 5.0
  */
 
-namespace Telegram\Api;
+namespace Telegram;
 
 class GetFile extends Query {
 
@@ -34,7 +34,7 @@ class GetFile extends Query {
         if(!$file->ok) {
             return null;
         }
-        $this->file=new \Telegram\Entity\File((array)$file->result);
+        $this->file=new Entity\File((array)$file->result);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $api_url.'/'.$file->result->file_path);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
@@ -48,7 +48,7 @@ class GetFile extends Query {
         return $result;
     }
 
-    public function getInfo(): \Telegram\Entity\File {
+    public function getInfo(): Entity\File {
         return $this->file;
     }
 

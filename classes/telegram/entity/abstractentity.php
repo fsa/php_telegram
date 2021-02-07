@@ -15,11 +15,11 @@ abstract class AbstractEntity implements \JsonSerializable {
     public function __construct(array $entity) {
         $r = new \ReflectionClass(static::class);
         foreach ($entity as $key=> $value) {
-            $prop = $r->getProperty($key);
-            if (!$prop || !$prop->getType()) {
+            if (!$r->hasProperty($key)) {
                 $this->unsupported[$key]=$value;
                 continue;
             }
+            $prop = $r->getProperty($key);
             $type = $prop->getType();
             $classname=$type->getName();
             switch ($classname) {

@@ -4,7 +4,7 @@
  * Telegram Bot API 5.0
  */
 
-namespace Telegram\Api;
+namespace Telegram;
 
 class SendMessage extends Query {
 
@@ -83,13 +83,13 @@ class SendMessage extends Query {
         $this->reply_to_message_id=$id;
     }
 
-    public function setReplyMarkup(\Telegram\Entity\ReplyMarkupInterface $keyboard): void {
+    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): void {
         $this->reply_markup=$keyboard;
     }
 
     public function buildQuery(): array {
         if (is_null($this->chat_id) or is_null($this->text)) {
-            throw new \Telegram\Exception('Required: chat_id, text');
+            throw new Exception('Required: chat_id, text');
         }
         return parent::buildQuery();
     }
