@@ -50,6 +50,10 @@ class ReplyKeyboardMarkup extends AbstractEntity implements ReplyMarkupInterface
         $this->selective=$selective;
     }
 
+    public function __toString(): string {
+        return json_encode($this->jsonSerialize(), JSON_UNESCAPED_UNICODE);
+    }
+
     public function jsonSerialize() {
         $props=get_object_vars($this);
         unset($props['unsupported']);

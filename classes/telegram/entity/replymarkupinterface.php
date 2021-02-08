@@ -8,4 +8,5 @@ namespace Telegram\Entity;
 
 interface ReplyMarkupInterface {
 
+    public function __toString();
 }

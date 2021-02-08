@@ -26,6 +26,10 @@ class InlineKeyboardMarkup extends AbstractEntity implements ReplyMarkupInterfac
         $this->row++;
     }
 
+    public function __toString(): string {
+        return json_encode($this->jsonSerialize(), JSON_UNESCAPED_UNICODE);
+    }
+
     public function jsonSerialize() {
         $props=get_object_vars($this);
         unset($props['unsupported']);
