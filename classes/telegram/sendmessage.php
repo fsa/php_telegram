@@ -39,7 +39,7 @@ class SendMessage extends Query {
         return 'sendMessage';
     }
 
-    public function setChatId(string $chat_id): void {
+    public function setChatId($chat_id): void {
         $this->chat_id=$chat_id;
     }
 
