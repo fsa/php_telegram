@@ -13,30 +13,22 @@ class Webhook {
     private static $json;
     private static Entity\Update $update;
 
-    public static function setAdminChat($admin_id) {
-        if (!$admin_id) {
-            return;
+    public static function getUpdate(array $config=null): Entity\Update {
+        if(is_null($config)) {
+            return self::$update;
         }
-        self::$admin_id=$admin_id;
-        self::setExceptionHandler($admin_id);
-    }
-
-    public static function getUpdate(): Entity\Update {
+        Query::init($config);
+        if (isset($config['admin_id'])) {
+            self::$admin_id=$config['admin_id'];
+            self::setExceptionHandler(self::$admin_id);
+        }
         self::$json=file_get_contents('php://input');
         self::$update=new Entity\Update(json_decode(self::$json, true, 512, JSON_THROW_ON_ERROR));
         return self::$update;
     }
 
-    public static function getUpdateEntity(): Entity\Update {
-        return self::$update;
-    }
-
-    public static function getRequestJson() {
-        return self::$json;
-    }
-
     public static function logRequet() {
-        syslog(LOG_DEBUG, __FILE__.'('.__LINE__.') Telegram Bot API request: '.self::getRequestJson());
+        syslog(LOG_DEBUG, __FILE__.'('.__LINE__.') Telegram Bot API request: '.self::$json);
     }
 
     public static function setExceptionHandler($chat_id) {
