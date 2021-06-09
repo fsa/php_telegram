@@ -17,4 +17,8 @@ class ReplyKeyboardRemove extends AbstractEntity implements ReplyMarkupInterface
         }
     }
 
+    public function __toString() {
+        return json_encode($this->jsonSerialize(), JSON_UNESCAPED_UNICODE);
+    }
+
 }
