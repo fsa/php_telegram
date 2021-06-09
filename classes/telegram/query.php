@@ -8,12 +8,25 @@ namespace Telegram;
 
 abstract class Query {
 
+    protected const API_URL='https://api.telegram.org/bot';
+
     protected static $token;
     protected static $proxy;
+    protected static $config;
 
-    public static function init(string $token, string $proxy=null) {
-        self::$token=$token;
-        self::$proxy=$proxy;
+    public static function init(array $config) {
+        if(!isset($config['token'])) {
+            throw new Exception('Token not set.');
+        }
+        self::$token=$config['token'];
+        if(isset($config['proxy'])) {
+            self::$proxy=$config['proxy'];
+        }
+        self::$config=$config;
+    }
+
+    public static function getConfigVar($name) {
+        return isset(self::$config[$name])?self::$config[$name]:null;
     }
 
     public function getActionName(): string {
@@ -26,9 +39,8 @@ abstract class Query {
     }
 
     public function httpPost(): object {
-        $api_url='https://api.telegram.org/bot'.self::$token;
         $ch=curl_init();
-        curl_setopt($ch, CURLOPT_URL, $api_url.'/'.$this->getActionName());
+        curl_setopt($ch, CURLOPT_URL, self::API_URL.self::$token.'/'.$this->getActionName());
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -45,10 +57,33 @@ abstract class Query {
         return json_decode($result);
     }
 
-    public function httpGet(): object {
-        $api_url='https://api.telegram.org/bot'.self::$token;
+    public function httpPostJson(): object {
+        $query=json_encode($this->buildQuery(), JSON_UNESCAPED_UNICODE|JSON_NUMERIC_CHECK);
         $ch=curl_init();
-        curl_setopt($ch, CURLOPT_URL, $api_url.'/'.$this->getActionName().'?'.http_build_query($this->buildQuery()));
+        curl_setopt($ch, CURLOPT_URL, self::API_URL.self::$token.'/'.$this->getActionName());
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        if (isset(self::$proxy)) {
+            curl_setopt($ch, CURLOPT_PROXY, self::$proxy);
+        }
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+           'Content-Type: application/json',
+           'Content-Length: ' . strlen($query))
+        );
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
+        $result=curl_exec($ch);
+        curl_close($ch);
+        if ($result===false) {
+            throw new Exception('Не удалось поучить данные для '.$this->getActionName());
+        }
+        return json_decode($result);
+    }
+
+    public function httpGet(): object {
+        $ch=curl_init();
+        curl_setopt($ch, CURLOPT_URL, self::API_URL.self::$token.'/'.$this->getActionName().'?'.http_build_query($this->buildQuery()));
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
