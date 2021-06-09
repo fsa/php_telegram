@@ -23,8 +23,8 @@ Telegram\Query::init($config);
 
 $config - массив с параметрами инициализации:
 
--$config['token'] - ваш ключ Telegram Bot API;
--$config['proxy'] - адрес прокси, если необходим.
+- $config['token'] - ваш ключ Telegram Bot API;
+- $config['proxy'] - адрес прокси, если необходим.
 
 Параметры могут содержать и другие ключи, значение которых можно будет получить через getConfigVar() с указанием имени параметра:
 ```php
